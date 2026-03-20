@@ -47,11 +47,11 @@ class FooterLocator extends StatelessWidget {
           final safePadding = MediaQuery.of(context).padding;
           footerNotifier._safeOffset = axis == Axis.vertical
               ? axisDirection == AxisDirection.down
-                    ? safePadding.bottom
-                    : safePadding.top
+                  ? safePadding.bottom
+                  : safePadding.top
               : axisDirection == AxisDirection.right
-              ? safePadding.right
-              : safePadding.left;
+                  ? safePadding.right
+                  : safePadding.left;
         }
         final footerWidget = footerNotifier._build(context);
         if (!clearExtent) {
@@ -60,9 +60,9 @@ class FooterLocator extends StatelessWidget {
               : footerWidget;
         }
         return _FooterLocatorRenderWidget(
-          child: footerWidget,
           isSliver: _isSliver,
           paintExtent: paintExtent,
+          child: footerWidget,
         );
       },
     );
@@ -75,10 +75,9 @@ class _FooterLocatorRenderWidget extends SingleChildRenderObjectWidget {
   final double paintExtent;
 
   const _FooterLocatorRenderWidget({
-    super.key,
-    required super.child,
     required this.isSliver,
     required this.paintExtent,
+    required super.child,
   });
 
   @override
@@ -96,8 +95,7 @@ class _FooterLocatorRenderBox extends RenderProxyBox {
   _FooterLocatorRenderBox({
     required this.context,
     required this.paintExtent,
-    RenderBox? child,
-  }) : super(child);
+  });
 
   @override
   final bool needsCompositing = true;
@@ -141,13 +139,13 @@ class _FooterLocatorRenderBox extends RenderProxyBox {
       final double dx = axis == Axis.vertical
           ? 0
           : axisDirection == AxisDirection.left
-          ? -extend
-          : 0;
+              ? -extend
+              : 0;
       final double dy = axis == Axis.horizontal
           ? 0
           : axisDirection == AxisDirection.up
-          ? -extend
-          : 0;
+              ? -extend
+              : 0;
       mOffset = Offset(dx, dy);
     }
     if (child != null) {
@@ -165,7 +163,6 @@ class _FooterLocatorRenderSliver extends RenderSliverSingleBoxAdapter {
   _FooterLocatorRenderSliver({
     required this.context,
     required this.paintExtent,
-    super.child,
   });
 
   @override
@@ -199,8 +196,7 @@ class _FooterLocatorRenderSliver extends RenderSliverSingleBoxAdapter {
     geometry = SliverGeometry(
       scrollExtent: 0,
       paintExtent: math.min(childExtent, paintExtent),
-      paintOrigin:
-          constraints.axisDirection == AxisDirection.down ||
+      paintOrigin: constraints.axisDirection == AxisDirection.down ||
               constraints.axisDirection == AxisDirection.right
           ? 0
           : math.min(footerNotifier.offset, constraints.remainingPaintExtent),
@@ -208,8 +204,7 @@ class _FooterLocatorRenderSliver extends RenderSliverSingleBoxAdapter {
       cacheExtent: math.min(childExtent, paintExtent),
       maxPaintExtent: math.max(childExtent, paintExtent),
       hitTestExtent: math.max(childExtent, paintedChildSize),
-      hasVisualOverflow:
-          childExtent > constraints.remainingPaintExtent ||
+      hasVisualOverflow: childExtent > constraints.remainingPaintExtent ||
           constraints.scrollOffset > 0,
       visible: true,
     );

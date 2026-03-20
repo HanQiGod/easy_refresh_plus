@@ -28,8 +28,8 @@ class _CupertinoActivityIndicator extends StatefulWidget {
     this.color,
     this.animating = true,
     this.radius = _kDefaultIndicatorRadius,
-  }) : assert(radius > 0.0),
-       progress = 1.0;
+  })  : assert(radius > 0.0),
+        progress = 1.0;
 
   /// Creates a non-animated iOS-style activity indicator that displays
   /// a partial count of ticks based on the value of [progress].
@@ -38,14 +38,13 @@ class _CupertinoActivityIndicator extends StatefulWidget {
   /// will be shown) and 1.0 (all ticks will be shown) inclusive. Defaults
   /// to 1.0.
   const _CupertinoActivityIndicator.partiallyRevealed({
-    super.key,
     this.color,
     this.radius = _kDefaultIndicatorRadius,
     this.progress = 1.0,
-  }) : assert(radius > 0.0),
-       assert(progress >= 0.0),
-       assert(progress <= 1.0),
-       animating = false;
+  })  : assert(radius > 0.0),
+        assert(progress >= 0.0),
+        assert(progress <= 1.0),
+        animating = false;
 
   /// Color of the activity indicator.
   ///
@@ -119,8 +118,7 @@ class _CupertinoActivityIndicatorState
       child: CustomPaint(
         painter: _CupertinoActivityIndicatorPainter(
           position: _controller,
-          activeColor:
-              widget.color ??
+          activeColor: widget.color ??
               CupertinoDynamicColor.resolve(_kActiveTickColor, context),
           radius: widget.radius,
           progress: widget.progress,
@@ -145,15 +143,15 @@ class _CupertinoActivityIndicatorPainter extends CustomPainter {
     required this.activeColor,
     required this.radius,
     required this.progress,
-  }) : tickFundamentalRRect = RRect.fromLTRBXY(
-         -radius / _kDefaultIndicatorRadius,
-         -radius / 3.0,
-         radius / _kDefaultIndicatorRadius,
-         -radius,
-         radius / _kDefaultIndicatorRadius,
-         radius / _kDefaultIndicatorRadius,
-       ),
-       super(repaint: position);
+  })  : tickFundamentalRRect = RRect.fromLTRBXY(
+          -radius / _kDefaultIndicatorRadius,
+          -radius / 3.0,
+          radius / _kDefaultIndicatorRadius,
+          -radius,
+          radius / _kDefaultIndicatorRadius,
+          radius / _kDefaultIndicatorRadius,
+        ),
+        super(repaint: position);
 
   final Animation<double> position;
   final Color activeColor;

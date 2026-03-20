@@ -69,8 +69,15 @@ class _ChatPageState extends State<ChatPage> {
       _messages.insert(0, MessageEntity(own: true, msg: _inputController.text));
     });
     _inputController.clear();
-    Future(() {
-      PrimaryScrollController.of(context).jumpTo(0);
+    final scrollController = PrimaryScrollController.maybeOf(context);
+    if (scrollController == null) {
+      return;
+    }
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) {
+        return;
+      }
+      scrollController.jumpTo(0);
     });
   }
 

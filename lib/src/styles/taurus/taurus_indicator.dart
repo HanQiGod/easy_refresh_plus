@@ -129,10 +129,10 @@ class _TaurusIndicatorState extends State<_TaurusIndicator>
     final random = math.Random();
     _windWidth = _minWindWidth + random.nextDouble() * 30;
     _windOffsets.clear();
-    final _windSegment = _windViewHeight / 10;
+    final windSegment = _windViewHeight / 10;
     for (int i = 0; i < 10; i++) {
       final dx = random.nextDouble() * 40;
-      final dy = _windSegment * i + random.nextDouble() * _windSegment;
+      final dy = windSegment * i + random.nextDouble() * windSegment;
       _windOffsets.add(Offset(dx, dy));
     }
   }
@@ -195,16 +195,14 @@ class _TaurusIndicatorState extends State<_TaurusIndicator>
                     }
                   }
                 } else if (_offset < _actualTriggerOffset / 3 * 2) {
-                  final scale =
-                      (_actualTriggerOffset / 3 * 2 - _offset) /
+                  final scale = (_actualTriggerOffset / 3 * 2 - _offset) /
                       (_actualTriggerOffset / 3 * 2 - _actualTriggerOffset / 2);
                   sideCloudWidth = sideCloudWidth * 0.7;
                   sideCloudBottom = sideCloudBottom * scale;
                   centerCloudWidth = centerCloudWidth * 0.8;
                   centerCloudBottom = centerCloudBottom * scale;
                 } else if (_offset < _actualTriggerOffset) {
-                  final scale =
-                      1 -
+                  final scale = 1 -
                       (_actualTriggerOffset - _offset) /
                           (_actualTriggerOffset / 3);
                   sideCloudWidth = sideCloudWidth * (0.7 + 0.3 * scale);
@@ -224,8 +222,7 @@ class _TaurusIndicatorState extends State<_TaurusIndicator>
                 double airplaneAngle = 0;
                 if (_offset < _actualTriggerOffset) {
                   double scale = _offset / _actualTriggerOffset;
-                  airplaneTop =
-                      _actualTriggerOffset -
+                  airplaneTop = _actualTriggerOffset -
                       (_actualTriggerOffset + _airplaneHeight) / 2 * scale;
                   airplaneLeft = (width - _airplaneWidth) / 2 * scale;
                 } else {
@@ -277,11 +274,10 @@ class _TaurusIndicatorState extends State<_TaurusIndicator>
                           final value = _disappearAnimationController.value;
                           airplaneTop =
                               (_actualTriggerOffset + _airplaneHeight * 2) /
-                                  2 *
-                                  (1 - value) -
-                              _airplaneHeight / 2 * 3;
-                          airplaneLeft =
-                              (width - _airplaneWidth) / 2 +
+                                      2 *
+                                      (1 - value) -
+                                  _airplaneHeight / 2 * 3;
+                          airplaneLeft = (width - _airplaneWidth) / 2 +
                               (width / 2 + _airplaneWidth * 3) * value;
                         }
                         return Positioned(
@@ -302,9 +298,8 @@ class _TaurusIndicatorState extends State<_TaurusIndicator>
                     // Center cloud
                     Positioned(
                       top: centerCloudTop,
-                      bottom: centerCloudBottom == null
-                          ? null
-                          : -centerCloudBottom,
+                      bottom:
+                          centerCloudBottom == null ? null : -centerCloudBottom,
                       child: PathsPaint(
                         paths: _cloudPaths,
                         colors: _cloudColors,

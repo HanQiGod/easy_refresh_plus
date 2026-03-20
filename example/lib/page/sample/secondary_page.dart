@@ -117,8 +117,10 @@ class _SecondaryPageState extends State<SecondaryPage> {
                             mode == IndicatorMode.secondaryClosing) {
                           return PopScope(
                             canPop: false,
-                            onPopInvoked: (_) {
-                              _controller.closeHeaderSecondary();
+                            onPopInvokedWithResult: (didPop, _) {
+                              if (!didPop) {
+                                _controller.closeHeaderSecondary();
+                              }
                             },
                             child: secondaryPage,
                           );
@@ -134,8 +136,7 @@ class _SecondaryPageState extends State<SecondaryPage> {
                   right: 0,
                   child: Center(
                     child: AnimatedOpacity(
-                      opacity:
-                          mode == IndicatorMode.secondaryArmed &&
+                      opacity: mode == IndicatorMode.secondaryArmed &&
                               !_callOpenSecondary
                           ? 1
                           : 0,
@@ -148,8 +149,7 @@ class _SecondaryPageState extends State<SecondaryPage> {
                   ),
                 ),
                 Opacity(
-                  opacity:
-                      (mode == IndicatorMode.secondaryReady ||
+                  opacity: (mode == IndicatorMode.secondaryReady ||
                           mode == IndicatorMode.secondaryOpen ||
                           mode == IndicatorMode.secondaryClosing)
                       ? 0

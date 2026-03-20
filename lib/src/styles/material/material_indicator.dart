@@ -17,11 +17,12 @@ physics.SpringDescription kMaterialSpringBuilder({
   required double offset,
   required double actualTriggerOffset,
   required double velocity,
-}) => physics.SpringDescription.withDampingRatio(
-  mass: 1,
-  stiffness: 500,
-  ratio: 1.1,
-);
+}) =>
+    physics.SpringDescription.withDampingRatio(
+      mass: 1,
+      stiffness: 500,
+      ratio: 1.1,
+    );
 
 /// Material indicator.
 /// Base widget for [MaterialHeader] and [MaterialFooter].
@@ -120,11 +121,12 @@ class _MaterialIndicatorState extends State<_MaterialIndicator> {
     if (widget.valueColor != null) {
       return null;
     }
-    final color =
-        widget.color ??
+    final color = widget.color ??
         ProgressIndicatorTheme.of(context).color ??
         Theme.of(context).colorScheme.primary;
-    return color.withOpacity(math.min(_offset / _actualTriggerOffset, 1));
+    return color.withValues(
+      alpha: math.min(_offset / _actualTriggerOffset, 1),
+    );
   }
 
   IndicatorMode get _mode => widget.state.mode;
@@ -155,8 +157,8 @@ class _MaterialIndicatorState extends State<_MaterialIndicator> {
             duration: widget.disappearDuration,
             scale:
                 _mode == IndicatorMode.processed || _mode == IndicatorMode.done
-                ? 0
-                : 1,
+                    ? 0
+                    : 1,
             child: RefreshProgressIndicator(
               value: _value,
               backgroundColor: widget.backgroundColor,
@@ -195,23 +197,23 @@ class _MaterialIndicatorState extends State<_MaterialIndicator> {
           Positioned(
             top: _axis == Axis.vertical
                 ? widget.reverse
-                      ? null
-                      : 0
+                    ? null
+                    : 0
                 : 0,
             left: _axis == Axis.horizontal
                 ? widget.reverse
-                      ? null
-                      : 0
+                    ? null
+                    : 0
                 : 0,
             right: _axis == Axis.horizontal
                 ? widget.reverse
-                      ? 0
-                      : null
+                    ? 0
+                    : null
                 : 0,
             bottom: _axis == Axis.vertical
                 ? widget.reverse
-                      ? 0
-                      : null
+                    ? 0
+                    : null
                 : 0,
             child: BezierBackground(
               state: widget.state,
@@ -224,23 +226,23 @@ class _MaterialIndicatorState extends State<_MaterialIndicator> {
         Positioned(
           top: _axis == Axis.vertical
               ? widget.reverse
-                    ? padding
-                    : null
+                  ? padding
+                  : null
               : 0,
           bottom: _axis == Axis.vertical
               ? widget.reverse
-                    ? null
-                    : padding
+                  ? null
+                  : padding
               : 0,
           left: _axis == Axis.horizontal
               ? widget.reverse
-                    ? padding
-                    : null
+                  ? padding
+                  : null
               : 0,
           right: _axis == Axis.horizontal
               ? widget.reverse
-                    ? null
-                    : padding
+                  ? null
+                  : padding
               : 0,
           child: Center(child: _buildIndicator()),
         ),

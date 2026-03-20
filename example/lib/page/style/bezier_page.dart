@@ -236,30 +236,25 @@ class _BezierPageState extends State<BezierPage> {
             }),
             ListTile(
               title: Text('Direction'.tr),
-              trailing: IntrinsicWidth(
-                child: Row(
-                  children: [
-                    Radio<Axis>(
-                      value: Axis.vertical,
-                      groupValue: _scrollDirection,
-                      onChanged: (value) {
-                        setState(() {
-                          _scrollDirection = value!;
-                        });
-                      },
-                    ),
-                    Text('Vertical'.tr),
-                    Radio<Axis>(
-                      value: Axis.horizontal,
-                      groupValue: _scrollDirection,
-                      onChanged: (value) {
-                        setState(() {
-                          _scrollDirection = value!;
-                        });
-                      },
-                    ),
-                    Text('Horizontal'.tr),
-                  ],
+              trailing: RadioGroup<Axis>(
+                groupValue: _scrollDirection,
+                onChanged: (value) {
+                  if (value == null) {
+                    return;
+                  }
+                  setState(() {
+                    _scrollDirection = value;
+                  });
+                },
+                child: IntrinsicWidth(
+                  child: Row(
+                    children: [
+                      const Radio<Axis>(value: Axis.vertical),
+                      Text('Vertical'.tr),
+                      const Radio<Axis>(value: Axis.horizontal),
+                      Text('Horizontal'.tr),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -345,8 +340,7 @@ class _BezierPageState extends State<BezierPage> {
                                     Padding(
                                       padding: EdgeInsets.only(
                                         right: 8,
-                                        bottom:
-                                            GetPlatform.isDesktop ||
+                                        bottom: GetPlatform.isDesktop ||
                                                 GetPlatform.isWeb
                                             ? 8
                                             : 0,

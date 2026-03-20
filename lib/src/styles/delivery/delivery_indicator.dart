@@ -178,13 +178,12 @@ class _DeliveryIndicatorState extends State<_DeliveryIndicator>
                     left: _cloudsX[i] % (size * 2 + width) - size,
                     top: _cloudsY[i],
                     child: AnimatedOpacity(
-                      opacity:
-                          _animationController.isAnimating &&
+                      opacity: _animationController.isAnimating &&
                               _mode != IndicatorMode.done
                           ? 1
                           : 0,
-                      child: widget!,
                       duration: kDeliveryDisappearDuration,
+                      child: widget!,
                     ),
                   );
                 },
@@ -213,13 +212,11 @@ class _DeliveryIndicatorState extends State<_DeliveryIndicator>
                   _animationController.value * math.pi * 4,
                 );
                 return AnimatedPositioned(
-                  duration:
-                      _mode == IndicatorMode.processed ||
+                  duration: _mode == IndicatorMode.processed ||
                           _mode == IndicatorMode.done
                       ? kDeliveryDisappearDuration
                       : Duration.zero,
-                  bottom:
-                      _mode == IndicatorMode.processed ||
+                  bottom: _mode == IndicatorMode.processed ||
                           _mode == IndicatorMode.done
                       ? _balloonWidth * 2
                       : offsetSin * 16,

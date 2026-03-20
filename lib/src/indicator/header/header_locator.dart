@@ -47,11 +47,11 @@ class HeaderLocator extends StatelessWidget {
           final safePadding = MediaQuery.of(context).padding;
           headerNotifier._safeOffset = axis == Axis.vertical
               ? axisDirection == AxisDirection.down
-                    ? safePadding.top
-                    : safePadding.bottom
+                  ? safePadding.top
+                  : safePadding.bottom
               : axisDirection == AxisDirection.right
-              ? safePadding.left
-              : safePadding.right;
+                  ? safePadding.left
+                  : safePadding.right;
         }
         final headerWidget = headerNotifier._build(context);
         if (!clearExtent) {
@@ -60,9 +60,9 @@ class HeaderLocator extends StatelessWidget {
               : headerWidget;
         }
         return _HeaderLocatorRenderWidget(
-          child: headerWidget,
           isSliver: _isSliver,
           paintExtent: paintExtent,
+          child: headerWidget,
         );
       },
     );
@@ -75,10 +75,9 @@ class _HeaderLocatorRenderWidget extends SingleChildRenderObjectWidget {
   final double paintExtent;
 
   const _HeaderLocatorRenderWidget({
-    super.key,
-    required super.child,
     required this.isSliver,
     required this.paintExtent,
+    required super.child,
   });
 
   @override
@@ -95,9 +94,8 @@ class _HeaderLocatorRenderBox extends RenderProxyBox {
 
   _HeaderLocatorRenderBox({
     required this.context,
-    RenderBox? child,
     required this.paintExtent,
-  }) : super(child);
+  });
 
   @override
   final bool needsCompositing = true;
@@ -141,13 +139,13 @@ class _HeaderLocatorRenderBox extends RenderProxyBox {
       final double dx = axis == Axis.vertical
           ? 0
           : axisDirection == AxisDirection.right
-          ? -extend
-          : 0;
+              ? -extend
+              : 0;
       final double dy = axis == Axis.horizontal
           ? 0
           : axisDirection == AxisDirection.down
-          ? -extend
-          : 0;
+              ? -extend
+              : 0;
       mOffset = Offset(dx, dy);
     }
     if (child != null) {
@@ -165,7 +163,6 @@ class _HeaderLocatorRenderSliver extends RenderSliverSingleBoxAdapter {
   _HeaderLocatorRenderSliver({
     required this.context,
     required this.paintExtent,
-    super.child,
   });
 
   @override
@@ -199,8 +196,7 @@ class _HeaderLocatorRenderSliver extends RenderSliverSingleBoxAdapter {
     geometry = SliverGeometry(
       scrollExtent: 0,
       paintExtent: math.min(childExtent, paintExtent),
-      paintOrigin:
-          (constraints.axisDirection == AxisDirection.down ||
+      paintOrigin: (constraints.axisDirection == AxisDirection.down ||
                   constraints.axisDirection == AxisDirection.right) &&
               !headerNotifier.clamping
           ? -headerNotifier.offset
@@ -209,8 +205,7 @@ class _HeaderLocatorRenderSliver extends RenderSliverSingleBoxAdapter {
       cacheExtent: math.min(childExtent, paintExtent),
       maxPaintExtent: math.max(childExtent, paintExtent),
       hitTestExtent: math.max(childExtent, paintedChildSize),
-      hasVisualOverflow:
-          childExtent > constraints.remainingPaintExtent ||
+      hasVisualOverflow: childExtent > constraints.remainingPaintExtent ||
           constraints.scrollOffset > 0,
       visible: true,
     );

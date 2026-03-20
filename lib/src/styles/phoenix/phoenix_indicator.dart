@@ -121,9 +121,8 @@ class _PhoenixIndicatorState extends State<_PhoenixIndicator>
         final width = math.min(constraints.maxWidth, _maxWidth);
         final skyHeight = 13 / 20 * width;
         final scale = ((_offset / _actualTriggerOffset) - 1) * 0.3 + 1;
-        final sunSize = _offset < _actualTriggerOffset
-            ? _sunSize
-            : _sunSize / scale;
+        final sunSize =
+            _offset < _actualTriggerOffset ? _sunSize : _sunSize / scale;
         return Stack(
           alignment: Alignment.center,
           children: [
@@ -146,8 +145,7 @@ class _PhoenixIndicatorState extends State<_PhoenixIndicator>
               top: _offset < _actualTriggerOffset
                   ? _actualTriggerOffset - (_offset * 0.9)
                   : _actualTriggerOffset * 0.1,
-              left:
-                  (constraints.maxWidth - width) / 2 +
+              left: (constraints.maxWidth - width) / 2 +
                   width * 0.3 +
                   sunSize / 2,
               child: AnimatedBuilder(
@@ -157,8 +155,8 @@ class _PhoenixIndicatorState extends State<_PhoenixIndicator>
                     angle: _animationController.isAnimating
                         ? -_animationController.value * (2 * math.pi)
                         : _offset / math.pi / 4,
-                    child: child,
                     origin: const Offset(1, 1),
+                    child: child,
                   );
                 },
                 child: PathsPaint(
